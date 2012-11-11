@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="11.5.1">
+  <zoom_level>8</zoom_level>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>240</x>
+      <y>120</y>
+      <w>168</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Module&gt;&gt;
+UserAuthView
+--
+_- authenticate user_
+_- create account_
+_- validate account_
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>240</x>
+      <y>392</y>
+      <w>168</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Module&gt;&gt;
+ReportView
+--
+_- get activity list_</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>240</x>
+      <y>256</y>
+      <w>168</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Module&gt;&gt;
+ActivityView
+--
+_- track activity_
+_- add activity type_
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>744</x>
+      <y>152</y>
+      <w>208</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>bt=.
+&lt;&lt;Module&gt;&gt;
+Framework
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>760</x>
+      <y>200</y>
+      <w>160</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>BaseForm</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
