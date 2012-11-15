@@ -1,4 +1,4 @@
-application: 5448
+application: pyexp5448
 version: 1
 runtime: python27
 api_version: 1
@@ -9,7 +9,6 @@ libraries:
         version: "1.3"
 
 env_variables:
-    PYTHONPATH: /home/ssharma/Class/5448/project/google_appengine/lib/django_1_3
     DJANGO_SETTINGS_MODULE: '5448.settings'
 
 handlers:
