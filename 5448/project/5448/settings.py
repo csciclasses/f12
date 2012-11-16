@@ -159,3 +159,5 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 SESSION_SAVE_EVERY_REQUEST = True
+
+APP_SECRET = '8@dF00d'

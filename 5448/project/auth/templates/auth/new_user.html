@@ -8,12 +8,14 @@
 
     <h2>Sign up for Activity Tracker</h3>
 
-
-    {% if resp and resp.status == 'UserExists' %}
-        User already exists. Please try logging in.
-    {% endif %}
-    {% if resp and resp.status == 'Error' %}
-        Unknown error occured. Please try again later.
+    {% if resp %}
+        <div style='font-size:12px; color:#f00;'>
+            {% if resp.status == 'UserExists' %}
+                User already exists. Please login <a href='{% url index %}' title='Login to Activity Tracker'>here</a>.
+            {% else %}
+                An error occured. Please try again later.
+            {% endif %}
+        </div>
     {% endif %}
 
     <div id='login-box' >

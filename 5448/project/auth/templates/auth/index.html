@@ -2,142 +2,8 @@
 <html>
     <head>
         <title>Activity Tracker - {% block title %}Home{% endblock title %}</title>
+        <link rel='stylesheet' href='/static/main.css' />
     </head>
-
-    <style type="text/css">
-        /* http://meyerweb.com/eric/tools/css/reset/
-           v2.0 | 20110126
-           License: none (public domain)
-        */
-
-        html, body, div, span, applet, object, iframe,
-        h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-        a, abbr, acronym, address, big, cite, code,
-        del, dfn, em, img, ins, kbd, q, s, samp,
-        small, strike, strong, sub, sup, tt, var,
-        b, u, i, center,
-        dl, dt, dd, ol, ul, li,
-        fieldset, form, label, legend,
-        table, caption, tbody, tfoot, thead, tr, th, td,
-        article, aside, canvas, details, embed,
-        figure, figcaption, footer, header, hgroup,
-        menu, nav, output, ruby, section, summary,
-        time, mark, audio, video {
-            margin: 0;
-            padding: 0;
-            border: 0;
-            font-size: 100%;
-            font: inherit;
-            vertical-align: baseline;
-        }
-        /* HTML5 display-role reset for older browsers */
-        article, aside, details, figcaption, figure,
-        footer, header, hgroup, menu, nav, section {
-            display: block;
-        }
-        body {
-            line-height: 1;
-            background-color: #666;
-        }
-        ol, ul {
-            list-style: none;
-        }
-        blockquote, q {
-            quotes: none;
-        }
-        blockquote:before, blockquote:after,
-        q:before, q:after {
-            content: '';
-            content: none;
-        }
-        table {
-            border-collapse: collapse;
-            border-spacing: 0;
-        }
-
-        /***
-        Custom
-        **/
-        body
-        {
-            width:320px;
-        }
-
-        div.body
-        {
-            width:100%;
-            border:1px solid #333;
-            margin:0px auto;
-            background-color: #fff;
-        }
-
-        div.header
-        {
-            background-color: #333;
-            text-transform: uppercase;
-            color:#fff;
-        }
-
-        div.header a
-        {
-            color:#fff;
-            text-decoration: none;
-        }
-
-        div.header ul li
-        {
-            float:left;
-            list-style-type: none;
-            padding:5px 20px 5px 20px;
-            font-weight: bold;
-        }
-
-        div.header ul li:hover
-        {
-            background-color: #444;
-        }
-
-        div.clear
-        {
-            clear:both;
-        }
-
-        div.content
-        {
-            padding:20px;
-        }
-
-        h2
-        {
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        #login-box
-        {
-            border:2px solid #333;
-            padding:5px;
-        }
-
-        #login-box label
-        {
-            font-weight: bold;
-            display: block;
-            padding-top:10px;
-            color:#333;
-        }
-
-        #login-box input[type=text]
-        {
-        }
-
-        ul.errorlist li
-        {
-            font-size:11px;
-            color:#f00;
-        }
-    </style>
-
     <body>
         <div class='body'>
             <div class='header'>
@@ -164,17 +30,14 @@
                     <h2>Login to Activity Tracker</h3>
 
                     {% if resp %}
-                    <div style='font-size:12px; color:#f00;'>
-                        {% if resp.status == 'Invalid' %}
-                            Invalid credentials provided. Please try again.
-                        {% endif %}
-                        {% if resp.status == 'NeedsValidation' %}
-                            User has not validated their account. Please check your email.
-                        {% endif %}
-                        {% if resp.status != 'NeedsValidation' and resp.status != 'Invalid' %}
-                            Unknown error occured. Please try again later.
-                        {% endif %}
-                    </div>
+                        <div style='font-size:12px; color:#f00;'>
+                            {% if resp.status == 'UserPending' %}
+                                User account is still pending. Please use the validation link provided in the Welcome email
+                                before accessing the website again.
+                            {% else %}
+                                Invalid credentials provided. Please try again.
+                            {% endif %}
+                        </div>
                     {% endif %}
 
                     <div id='login-box' >

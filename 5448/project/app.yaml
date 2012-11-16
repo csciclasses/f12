@@ -8,10 +8,16 @@ libraries:
     -   name: django
         version: "1.3"
 
+    -   name: pycrypto
+        version: "2.6"
+
 env_variables:
     DJANGO_SETTINGS_MODULE: '5448.settings'
 
 handlers:
+    -   url: /static
+        static_dir: static
+
     -   url: /.*
         script: 5448.wsgi.application
 

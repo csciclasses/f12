@@ -21,7 +21,6 @@ def new_user(request):
             resp = models.User.create(form.cleaned_data['email'], form.cleaned_data['password'])
             if resp['status'] == 'UserCreated':
                 return redirect('auth-user-created')
-
     return render(request, 'auth/new_user.html', locals())
 
 
@@ -41,7 +40,7 @@ def login(request):
 
         if resp['status'] == 'Authenticated':
             request.session['user'] = resp
-            request.session.save()
+            #request.session.save()
             #memcache.add('SESSION_%s' % request.session.session_key, resp, 60)
             return redirect('dashboard')
 
