@@ -163,6 +163,20 @@
 
                     <h2>Login to Activity Tracker</h3>
 
+                    {% if resp %}
+                    <div style='font-size:12px; color:#f00;'>
+                        {% if resp.status == 'Invalid' %}
+                            Invalid credentials provided. Please try again.
+                        {% endif %}
+                        {% if resp.status == 'NeedsValidation' %}
+                            User has not validated their account. Please check your email.
+                        {% endif %}
+                        {% if resp.status != 'NeedsValidation' and resp.status != 'Invalid' %}
+                            Unknown error occured. Please try again later.
+                        {% endif %}
+                    </div>
+                    {% endif %}
+
                     <div id='login-box' >
                         <form method='POST' action='{% url auth-login %}'>
                             {% csrf_token %}

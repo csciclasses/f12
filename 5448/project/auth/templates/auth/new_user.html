@@ -8,6 +8,14 @@
 
     <h2>Sign up for Activity Tracker</h3>
 
+
+    {% if resp and resp.status == 'UserExists' %}
+        User already exists. Please try logging in.
+    {% endif %}
+    {% if resp and resp.status == 'Error' %}
+        Unknown error occured. Please try again later.
+    {% endif %}
+
     <div id='login-box' >
         <form method='POST' action='{% url auth-new-user %}'>
             {% csrf_token %}

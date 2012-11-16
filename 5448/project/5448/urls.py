@@ -17,6 +17,9 @@ urlpatterns = patterns('',
 
     url(r'^$', 'auth.views.index', name='index'),
     url(r'^new/$', 'auth.views.new_user', name='auth-new-user'),
+    url(r'^created/$', 'auth.views.user_created', name='auth-user-created'),
     url(r'^login/$', 'auth.views.login', name='auth-login'),
     url(r'^logout/$', 'auth.views.logout', name='auth-logout'),
+
+    url(r'^dashboard/$', 'dashboard.views.index', name='dashboard'),
 )

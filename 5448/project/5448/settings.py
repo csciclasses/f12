@@ -108,7 +108,7 @@ TEMPLATE_DIRS = (
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
 
-    
+
 )
 
 INSTALLED_APPS = (
@@ -124,6 +124,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'auth',
     'core',
+    'dashboard',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -155,3 +156,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.media",
     "core.context_processors.common_view"
 )
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+SESSION_SAVE_EVERY_REQUEST = True
