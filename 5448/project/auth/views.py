@@ -8,7 +8,7 @@ from django.views.decorators.csrf import csrf_protect
 @csrf_protect
 def index(request):
     form = forms.LoginForm()
-    return render(request, 'auth/index.html', locals())
+    return render(request, 'index.html', locals())
 
 
 @csrf_protect
@@ -21,15 +21,16 @@ def new_user(request):
             resp = models.User.create(form.cleaned_data['email'], form.cleaned_data['password'])
             if resp['status'] == 'UserCreated':
                 return redirect('auth-user-created')
-    return render(request, 'auth/new_user.html', locals())
+    return render(request, 'new_user.html', locals())
 
 
 def user_created(request):
-    return render(request, 'auth/user_created.html', locals())
+    return render(request, 'user_created.html', locals())
 
 
-def confirm(request, token):
-    return HttpResponse('Confirm User account')
+def validate(request, token):
+    resp = models.User.validate(token)
+    return render(request, 'validate.html', locals())
 
 
 @csrf_protect
@@ -44,7 +45,7 @@ def login(request):
             #memcache.add('SESSION_%s' % request.session.session_key, resp, 60)
             return redirect('dashboard')
 
-    return render(request, 'auth/index.html', locals())
+    return render(request, 'index.html', locals())
 
 
 def logout(request):

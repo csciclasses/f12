@@ -8,10 +8,21 @@ class User(db.Model):
     uc_email = db.EmailProperty()
     password = db.StringProperty()
     creation_date = db.DateTimeProperty(auto_now_add=True)
-    validated = db.BooleanProperty()
+    active = db.BooleanProperty()
 
     def _can_login(self):
-        return self.validated == True
+        return self.active == True
+
+    def _send_welcome_email(self):
+        token = utils.EncUtil.encrypt('{0}'.format(self.key().id()))
+        mail.send_mail(sender='Activity Tracker <subrat7@gmail.com>', to=self.email, subject='Email Validation', body='''
+                You need to validate your account before you can access the website.
+                Please click on the link below to validate your account.
+
+                http://pyexp5448.appspot.com/validate/{0}
+
+                Thank you.
+            '''.format(token))
 
     @staticmethod
     def _get_user_by_email(email):
@@ -30,18 +41,7 @@ class User(db.Model):
         if not key or not key.id():
             return {'status': 'UnknownError'}
 
-        token = utils.EncUtil.encrypt('{0}'.format(key.id()))
-
-        mail.send_mail(sender='Activity Tracker <subrat7@gmail.com>',
-            to=email, subject='Email Validation ',
-            body='''
-                You need to validate your account before you can access the website.
-                Please click on the link below to validate your account.
-
-                http://pyexp5448.appspot.com/validate/{0}
-
-                Thank you.
-            '''.format(token))
+        user._send_welcome_email()
         return {'status': 'UserCreated'}
 
     @staticmethod
@@ -55,3 +55,14 @@ class User(db.Model):
             return {'status': 'Authenticated', 'email': user.email}
         else:
             return {'status': 'InvalidCredentials'}
+
+    @staticmethod
+    def validate(token):
+        user_id = utils.EncUtil.decrypt(token)
+        user = User.get_by_id(user_id)
+        if not user:
+            return {'status': 'ValidateFailed'}
+        else:
+            user.active = True
+            user.put()
+            return {'status': 'UserActivated'}

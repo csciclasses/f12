@@ -18,6 +18,7 @@ urlpatterns = patterns('',
     url(r'^$', 'auth.views.index', name='index'),
     url(r'^new/$', 'auth.views.new_user', name='auth-new-user'),
     url(r'^created/$', 'auth.views.user_created', name='auth-user-created'),
+    url(r'^validate/(?P<token>.*)/$', 'auth.views.validate', name='auth-user-validate'),
     url(r'^login/$', 'auth.views.login', name='auth-login'),
     url(r'^logout/$', 'auth.views.logout', name='auth-logout'),
 

@@ -1,0 +1,18 @@
+{% extends 'index.html' %}
+
+{% block title %}
+    User Validation
+{% endblock title %}
+
+{% block content %}
+
+    <h2>User Validation</h2>
+
+    {% if resp['status'] == 'UserActivated' %}
+        The User account was successfully activated. You can now login to the website.
+    {% else %}
+        An error occurred while trying to validate the User account. Please try again later.
+    {% endif %}
+    <br />
+
+{% endblock content %}
