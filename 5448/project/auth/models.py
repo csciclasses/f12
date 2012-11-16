@@ -58,8 +58,13 @@ class User(db.Model):
 
     @staticmethod
     def validate(token):
-        user_id = utils.EncUtil.decrypt(token)
-        user = User.get_by_id(user_id)
+        try:
+            dec_str = utils.EncUtil.decrypt(token)
+            user_id = int(dec_str)
+            user = User.get_by_id(user_id)
+        except:
+            user = None
+
         if not user:
             return {'status': 'ValidateFailed'}
         else:

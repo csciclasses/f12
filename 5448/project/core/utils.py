@@ -15,7 +15,7 @@ class EncUtil:
     def decrypt(value):
         if not isinstance(value, basestring):
             raise ValueError('Value to has must be of type string')
-        return base64.encodestring(value)
+        return base64.decodestring(value)
 
 if not hasattr(settings, 'APP_SECRET'):
     raise ImproperlyConfigured('Encryption Key must be properly defined')
