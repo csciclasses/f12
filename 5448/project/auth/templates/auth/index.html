@@ -58,9 +58,14 @@
         /***
         Custom
         **/
+        body
+        {
+            width:320px;
+        }
+
         div.body
         {
-            width:900px;
+            width:100%;
             border:1px solid #333;
             margin:0px auto;
             background-color: #fff;
@@ -84,6 +89,7 @@
             float:left;
             list-style-type: none;
             padding:5px 20px 5px 20px;
+            font-weight: bold;
         }
 
         div.header ul li:hover
@@ -109,7 +115,6 @@
 
         #login-box
         {
-            width:300px;
             border:2px solid #333;
             padding:5px;
         }
@@ -124,7 +129,6 @@
 
         #login-box input[type=text]
         {
-            width: 200px;
         }
 
         ul.errorlist li
@@ -144,7 +148,11 @@
                                 Home
                             </a>
                         </li>
-                        <li>New Account</li>
+                        <li>
+                            <a href='{% url auth-new-user %}' title='Activity Tracker - New User'>
+                                New User
+                            </a>
+                        </li>
                     {% endblock menu %}
                 </ul>
                 <div class='clear'></div>
@@ -158,6 +166,7 @@
                     <div id='login-box' >
                         <form method='POST' action='{% url auth-login %}'>
                             {% csrf_token %}
+
                             {{ form }}
 
                             <p>&nbsp;</p>

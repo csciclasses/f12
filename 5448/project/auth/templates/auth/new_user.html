@@ -1,0 +1,22 @@
+{% extends 'auth/index.html' %}
+
+{% block title %}
+    Create a New User
+{% endblock title %}
+
+{% block content %}
+
+    <h2>Sign up for Activity Tracker</h3>
+
+    <div id='login-box' >
+        <form method='POST' action='{% url auth-new-user %}'>
+            {% csrf_token %}
+
+            {{ form }}
+
+            <p>&nbsp;</p>
+            <input type='submit' value='Submit' />
+        </form>
+    </div>
+
+{% endblock content %}

@@ -10,15 +10,22 @@ def index(request):
     return render(request, 'auth/index.html', locals())
 
 
+@csrf_protect
 def new_user(request):
-    return HttpResponse('Auth New User View')
+    if request.method == 'GET':
+        form = forms.NewUserForm()
+    else:
+        form = forms.NewUserForm(request.POST)
+        if form.is_valid():
+            return HttpResponse('NewUser - {0}'.format(form.cleaned_data))
+    return render(request, 'auth/new_user.html', locals())
 
 
 @csrf_protect
 def login(request):
     form = forms.LoginForm(request.POST)
     if form.is_valid():
-        pass
+        return HttpResponse('Login - {0}'.format(form.cleaned_data))
     return render(request, 'auth/index.html', locals())
 
 
