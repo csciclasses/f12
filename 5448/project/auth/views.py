@@ -41,7 +41,7 @@ def login(request):
             request.session['user'] = resp
             return redirect('dashboard')
 
-    return render(request, 'index.html', locals())
+    return render(request, 'auth_index.html', locals())
 
 
 def logout(request):
