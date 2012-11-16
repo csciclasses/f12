@@ -1,6 +1,6 @@
 from google.appengine.ext import db
 from google.appengine.api import mail
-from core import utils
+from core.utils import HashUtil, EncUtil
 
 
 class User(db.Model):
@@ -14,7 +14,7 @@ class User(db.Model):
         return self.active == True
 
     def _send_welcome_email(self):
-        token = utils.EncUtil.encrypt('{0}'.format(self.key().id()))
+        token = EncUtil.encrypt('{0}'.format(self.key().id()))
         mail.send_mail(sender='Activity Tracker <subrat7@gmail.com>', to=self.email, subject='Email Validation', body='''
                 You need to validate your account before you can access the website.
                 Please click on the link below to validate your account.
@@ -34,8 +34,8 @@ class User(db.Model):
         if user:
             return {'status': 'UserExists'}
 
-        password = utils.HashUtil.hash(password)
-        user = User(email=email, uc_email=email.upper(), password=password, validated=False)
+        password = HashUtil.hash(password)
+        user = User(email=email, uc_email=email.upper(), password=password, active=False)
         key = user.put()
 
         if not key or not key.id():
@@ -51,7 +51,7 @@ class User(db.Model):
             return {'status': 'InvalidCredentials'}
         elif not user._can_login():
             return {'status': 'UserPending'}
-        elif user.password == utils.HashUtil.hash(password):
+        elif user.password == HashUtil.hash(password):
             return {'status': 'Authenticated', 'email': user.email}
         else:
             return {'status': 'InvalidCredentials'}
@@ -59,7 +59,7 @@ class User(db.Model):
     @staticmethod
     def validate(token):
         try:
-            dec_str = utils.EncUtil.decrypt(token)
+            dec_str = EncUtil.decrypt(token)
             user_id = int(dec_str)
             user = User.get_by_id(user_id)
         except:

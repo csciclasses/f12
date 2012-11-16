@@ -69,6 +69,7 @@ div.header
     text-transform: uppercase;
     color:#fff;
     margin:0px auto;
+    vertical-align: middle;
 }
 
 div.header a
@@ -81,8 +82,7 @@ div.header ul li
 {
     float:left;
     list-style-type: none;
-    padding:5px 20px 5px 20px;
-    font-weight: bold;
+    padding:10px 20px 5px 20px;
 }
 
 div.header ul li:hover
@@ -95,9 +95,16 @@ div.clear
     clear:both;
 }
 
-div.content
+div.content, div.footer
 {
     padding:20px;
+    margin:0px auto;
+}
+
+div.footer
+{
+    background-color: #ddd;
+    font-size: 13px;
 }
 
 h2
@@ -124,5 +131,11 @@ ul.errorlist li
 {
     font-size:11px;
     color:#f00;
+}
+
+span.title-email
+{
+    font-size:13px;
+    color:#33F;
 }
 

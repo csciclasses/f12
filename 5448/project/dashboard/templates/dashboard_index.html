@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Activity Tracker - {% block title %}Dashboard{% endblock title %}</title>
+        <link rel='stylesheet' href='/static/main.css' />
+    </head>
+    <body>
+        <div class='body'>
+            <div class='header'>
+                <ul>
+                    {% block menu %}
+                        <li>
+                            <a href='{% url dashboard %}' title='Activity Tracker - Home'>
+                                Home
+                            </a>
+                        </li>
+                        <li>
+                            <a href='#' title='Activity Tracker - Reporting'>
+                                Reports
+                            </a>
+                        </li>
+                    {% endblock menu %}
+                </ul>
+                <div class='clear'></div>
+            </div>
+
+            <div class='content'>
+                <h2>
+                    {%block content-title %}Track Activity{% endblock content-title %}
+                </h2>
+                {% block content %}
+                 {% endblock content %}
+            </div>
+
+            <div class='footer'>
+                <ul>
+                    <li>{{ user.email }}</li>
+                    <li>
+                        <a href='{% url auth-logout %}'>Logout</a>
+                    </li>
+                </li>
+            </div>
+        </div>
+    </body>
+</html>

@@ -153,8 +153,8 @@ LOGGING = {
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.debug",
-    "django.core.context_processors.media",
-    "core.context_processors.common_view"
+    #"django.core.context_processors.media",
+    "core.utils.user_view_context_processor"
 )
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.cache'

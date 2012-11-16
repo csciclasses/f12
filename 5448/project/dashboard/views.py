@@ -1,5 +1,7 @@
-from django.http import HttpResponse
+from core.utils import ViewDecorators
+from django.shortcuts import render
 
 
+@ViewDecorators.require_user
 def index(request):
-    return HttpResponse('{0}'.format(request.session.keys()))
+    return render(request, 'dashboard_index.html')

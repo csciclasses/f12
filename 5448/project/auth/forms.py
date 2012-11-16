@@ -1,8 +1,9 @@
 from django import forms
 
+
 class LoginForm(forms.Form):
-    email = forms.EmailField(max_length= 50, label='Email',
-        widget=forms.TextInput(attrs={'placeholder':'Email address'}),
+    email = forms.EmailField(max_length=50, label='Email',
+        widget=forms.TextInput(attrs={'placeholder': 'Email address'}),
         error_messages={
             'required': 'Email is required',
             'invalid': 'Please enter a valid Email',
@@ -10,7 +11,7 @@ class LoginForm(forms.Form):
             })
 
     password = forms.CharField(max_length=50, label='Password',
-        widget=forms.TextInput(attrs={'placeholder':'Password'}),
+        widget=forms.PasswordInput(attrs={'placeholder': 'Password'}),
         error_messages={
             'required': 'Password is required',
             'invalid': 'Please enter a valid Password',
@@ -20,7 +21,7 @@ class LoginForm(forms.Form):
 
 class NewUserForm(LoginForm):
     confirm_password = forms.CharField(max_length=50, label='Confirm Password',
-        widget=forms.TextInput(attrs={'placeholder':'Confirm Password'}),
+        widget=forms.PasswordInput(attrs={'placeholder': 'Confirm Password'}),
         error_messages={
             'required': 'Confirm Password is required',
             'invalid': 'Please enter a valid Confirm Password',

@@ -1,14 +1,12 @@
-from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from auth import forms, models
 from django.views.decorators.csrf import csrf_protect
-#from google.appengine.api import memcache
 
 
 @csrf_protect
 def index(request):
     form = forms.LoginForm()
-    return render(request, 'index.html', locals())
+    return render(request, 'auth_index.html', locals())
 
 
 @csrf_protect
@@ -41,14 +39,11 @@ def login(request):
 
         if resp['status'] == 'Authenticated':
             request.session['user'] = resp
-            #request.session.save()
-            #memcache.add('SESSION_%s' % request.session.session_key, resp, 60)
             return redirect('dashboard')
 
     return render(request, 'index.html', locals())
 
 
 def logout(request):
-    #memcache.delete('SESSION_%s' % request.sessionid)
     request.session.clear()
-    return HttpResponse('Logout')
+    return redirect('index')
