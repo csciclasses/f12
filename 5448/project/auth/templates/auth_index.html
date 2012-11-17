@@ -30,7 +30,7 @@
                     <h2>Login to Activity Tracker</h3>
 
                     {% if resp %}
-                        <div style='font-size:12px; color:#f00;'>
+                        <div class='error'>
                             {% if resp.status == 'UserPending' %}
                                 User account is still pending. Please use the validation link provided in the Welcome email
                                 before accessing the website again.

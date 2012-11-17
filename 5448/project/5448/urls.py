@@ -23,4 +23,5 @@ urlpatterns = patterns('',
     url(r'^logout/$', 'auth.views.logout', name='auth-logout'),
 
     url(r'^dashboard/$', 'dashboard.views.index', name='dashboard'),
+    url(r'^create_type/$', 'dashboard.views.create_activity_type', name='create-type'),
 )

@@ -29,7 +29,13 @@
                     {%block content-title %}Track Activity{% endblock content-title %}
                 </h2>
                 {% block content %}
-                 {% endblock content %}
+
+                    {{ activity_type_list }}
+
+                    <p>&nbsp;</p>
+                    <a href='{% url create-type %}' title='Create a new Activity Type'>Create a new Activity Type</a>
+                    <p>&nbsp;</p>
+                {% endblock content %}
             </div>
 
             <div class='footer'>

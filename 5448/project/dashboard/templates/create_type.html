@@ -1,0 +1,30 @@
+{% extends 'dashboard_index.html' %}
+
+{% block title %}Create Activity Type{% endblock title %}
+
+{% block content-title %}Create Activity Type{% endblock content-title %}
+
+{% block content %}
+
+    {% if resp %}
+        <div class='error'>
+            {% if resp.status == 'NameUsed' %}
+                Name is already in use. Please select a different name.
+            {% endif %}
+        </div>
+    {% endif %}
+
+    <form action='{% url create-type %}' method='POST'>
+        {% csrf_token %}
+
+        {{ form }}
+
+       <p>&nbsp;</p>
+        <input type='submit' value='Save' />
+
+    </form>
+
+   <p>&nbsp;</p>
+   Just kidding. Go back to <a href='{% url dashboard %}' title='Go back to Dashboard'>Dashboard</a>.
+   <p>&nbsp;</p>
+{% endblock content %}
