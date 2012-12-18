@@ -145,3 +145,38 @@ div.content a
 {
     font-size: 12px;
 }
+
+div.filters
+{
+    padding:15px;
+    background-color:#8AB7D7;
+    box-shadow: 0 0 5px 0 #CCC;
+    border-radius: 5px;
+    border: 1px solid #333;
+}
+
+div.results table
+{
+    width:100%;
+    border: 1px solid #333;
+}
+
+div.results th
+{
+    padding:5px;
+    background-color:#33c;
+    font-weight: bold;
+    color:#fff;
+    text-transform: uppercase;
+    text-align:left;
+}
+
+div.results tr.even
+{
+    background-color:#eee;
+}
+
+div.results td
+{
+    padding:3px 5px;
+}

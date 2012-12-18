@@ -57,6 +57,40 @@ class Activity(db.Model):
     def create_activity(email, data):
         user = User._get_user_by_email(email)
         activity_type = ActivityType.get_by_id(int(data['activity_type']))
-        Activity(user=user, activity_type=activity_type, hours=data.get('hours', 0),
+        key = Activity(user=user, activity_type=activity_type, hours=data.get('hours', 0),
             minutes=data.get('minutes', 0), seconds=data.get('seconds', 0)).put()
-        return {'status': 'ActivitySaved'}
+        return {'status': 'ActivitySaved', 'id': key.id()}
+
+    @staticmethod
+    def get_user_activity(email, filters):
+        user = User._get_user_by_email(email)
+        activity_type = filters.get('activity_type', -1)
+
+        q = Activity.all().filter('user =', user).order('-created_on')
+
+        if activity_type and int(activity_type) != -1:
+            activity_type = ActivityType.get_by_id(int(activity_type))
+            q.filter('activity_type = ', activity_type)
+
+        if 'from_date' in filters and filters['from_date']:
+            q.filter('created_on >= ', filters['from_date'])
+
+        if 'to_date' in filters and filters['to_date']:
+            q.filter('created_on <= ', filters['to_date'])
+
+        results = list()
+        for i in q.run():
+            item = {
+                'id': i.key().id(),
+                'activity_type_name': i.activity_type.name,
+                'user_id': i.user.key().id(),
+                'created_on': i.created_on,
+                'hours': i.hours,
+                'minutes': i.minutes,
+                'seconds': i.seconds,
+            }
+            results.append(item)
+        return results
+
+
+

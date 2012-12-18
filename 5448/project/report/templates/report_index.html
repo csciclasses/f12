@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Activity Tracker - {% block title %}Report{% endblock title %}</title>
+        <link rel='stylesheet' href='/static/main.css' />
+    </head>
+    <body>
+        <div class='body'>
+            <div class='header'>
+                <ul>
+                    {% block menu %}
+                        <li>
+                            <a href='{% url dashboard %}' title='Activity Tracker - Home'>
+                                Home
+                            </a>
+                        </li>
+                        <li>
+                            <a href='{% url report %}' title='Activity Tracker - Reporting'>
+                                Reports
+                            </a>
+                        </li>
+                    {% endblock menu %}
+                </ul>
+                <div class='clear'></div>
+            </div>
+
+            <div class='content'>
+                <h2>
+                    {%block content-title %}Reporting{% endblock content-title %}
+                </h2>
+
+                {% block content %}
+                    {% if form.errors %}
+                        <div style='border:1px solid #333; padding:10px; font-size:0.8em; background-color:#fdcec9;'>
+                            Please correct the following errors:
+                            <ul style='list-style-type: disc; padding: 10px 25px;'>
+                            {% for k,v in form.errors.items %}
+                                <li>{{ v|join:", " }}</li>
+                            {% endfor %}
+                            </ul>
+                        </div>
+                        <p>&nbsp;</p>
+                    {% endif %}
+
+                    <div class='filters'>
+                        <form method='POST' action='{% url report %}'>
+                            {% csrf_token %}
+
+                            <table>
+                                <tr>
+                                    <td>
+                                        {{ form.activity_type.label_tag }}
+                                    </td>
+                                    <td>
+                                        {{ form.activity_type.as_widget }}
+                                    </td>
+
+                                    <td colspan='3' style='text-align:right;'>
+                                        <input type='submit' value='Apply Filters' />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style='text-align:right;'>
+                                        {{ form.from_date.label_tag }}
+                                    </td>
+                                    <td>
+                                        {{ form.from_date.as_widget }}
+                                    </td>
+                                    <td>&nbsp;</td>
+                                    <td style='text-align:right;'>
+                                        {{ form.to_date.label_tag }}
+                                    </td>
+                                    <td>
+                                        {{ form.to_date.as_widget }}
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
+                    </div>
+
+                    <p>&nbsp;</p>
+
+                    <div class='results'>
+                        <table>
+                            <tr>
+                                <th>ID</th>
+                                <th>Activity Type</th>
+                                <th>Created On</th>
+                                <th>Duration</th>
+                            </tr>
+                            {% for item in activity_list %}
+                                <tr class='{% cycle '' 'even' %}'>
+                                    <td>{{ item.id }}</td>
+                                    <td>{{ item.activity_type_name }}</td>
+                                    <td>{{ item.created_on|date:"m/d/y P" }}</td>
+                                    <td>
+                                        {{ item.hours|default_if_none:"0" }}h&nbsp;
+                                        {{ item.minutes|default_if_none:"0" }}m&nbsp;
+                                        {{ item.seconds|default_if_none:"0" }}s
+                                    </td>
+                                </tr>
+                            {% empty %}
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td colspan='3'>No activities found.</td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+
+                {% endblock content %}
+            </div>
+
+            <div class='footer'>
+                <ul>
+                    <li>{{ user.email }}</li>
+                    <li>
+                        <a href='{% url auth-logout %}'>Logout</a>
+                    </li>
+                </li>
+            </div>
+        </div>
+    </body>
+</html>

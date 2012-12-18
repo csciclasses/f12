@@ -125,6 +125,7 @@ INSTALLED_APPS = (
     'auth',
     'core',
     'dashboard',
+    'report',
 )
 
 # A sample logging configuration. The only tangible logging

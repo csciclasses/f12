@@ -1,4 +1,4 @@
-from django.conf.urls.defaults import patterns, include, url
+from django.conf.urls.defaults import patterns, url
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
@@ -24,4 +24,6 @@ urlpatterns = patterns('',
 
     url(r'^dashboard/$', 'dashboard.views.index', name='dashboard'),
     url(r'^create_type/$', 'dashboard.views.create_activity_type', name='create-type'),
+
+    url(r'^report/$', 'report.views.index', name='report'),
 )

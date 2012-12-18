@@ -22,7 +22,7 @@
     {% else %}
         {% if resp and resp.status == 'ActivitySaved' %}
             <div style='border:1px solid #333; padding:10px; font-size:0.8em; background-color:#fdcec9;'>
-                Activity saved.
+                Activity saved with id: {{ resp.id }}
             </div>
             <p>&nbsp;</p>
         {% endif %}
