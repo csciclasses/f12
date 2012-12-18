@@ -1,8 +1,8 @@
 from django import forms
 
 
-class ReportForm(forms.Form):
-    activity_type = forms.ChoiceField(label='Activity Type:',
+class ActivityListForm(forms.Form):
+    activity_type = forms.ChoiceField(label='Activity:',
         error_messages={
             'required': 'Activity Type is required',
             'invalid': 'Invalid Activity Type selected'},
@@ -10,11 +10,11 @@ class ReportForm(forms.Form):
     from_date = forms.DateField(label='From:', required=False,
         error_messages={
         'invalid': 'Invalid From date'},
-        widget=forms.TextInput(attrs={'placeholder':'mm/dd/yy'}))
+        widget=forms.TextInput(attrs={'placeholder': 'mm/dd/yy'}))
     to_date = forms.DateField(label='To:', required=False,
         error_messages={
         'invalid': 'Invalid To date'},
-        widget=forms.TextInput(attrs={'placeholder':'mm/dd/yy'}))
+        widget=forms.TextInput(attrs={'placeholder': 'mm/dd/yy'}))
 
     def prepare(self, activity_type_list):
         choices = map(lambda x: (x['id'], x['name']), activity_type_list)

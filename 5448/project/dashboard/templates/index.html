@@ -29,33 +29,34 @@
     {% endif %}
 
 
-    <form action='{% url dashboard %}' method='POST'>
-        {% csrf_token %}
+    <div class='filters'>
+        <form action='{% url dashboard %}' method='POST'>
+            {% csrf_token %}
 
-        <table>
-            <tr>
-                <td>Activity Type:</td>
-                <td>&nbsp;{{ form.activity_type.as_widget }}</td>
-                <td>&nbsp;</td>
-            </tr>
+            <table>
+                <tr>
+                    <td>Activity Type:</td>
+                    <td>&nbsp;{{ form.activity_type.as_widget }}</td>
+                    <td>&nbsp;</td>
+                </tr>
 
-            <tr>
-                <td>{{ form.hours.label_tag }}</td>
-                <td>{{ form.minutes.label_tag }}</td>
-                <td>{{ form.seconds.label_tag }}</td>
-            </tr>
-            <tr class='small_input'>
-                <td>{{ form.hours.as_widget }}</td>
-                <td>{{ form.minutes.as_widget }}</td>
-                <td>{{ form.seconds.as_widget }}</td>
-            </tr>
-        </table>
+                <tr>
+                    <td>{{ form.hours.label_tag }}</td>
+                    <td>{{ form.minutes.label_tag }}</td>
+                    <td>{{ form.seconds.label_tag }}</td>
+                </tr>
+                <tr class='small_input'>
+                    <td>{{ form.hours.as_widget }}</td>
+                    <td>{{ form.minutes.as_widget }}</td>
+                    <td>{{ form.seconds.as_widget }}</td>
+                </tr>
+            </table>
 
-       <p>&nbsp;</p>
-        <input type='submit' value='Save' />
+           <p>&nbsp;</p>
+            <input type='submit' value='Save' />
 
-    </form>
-
+        </form>
+    </div>
    <p>&nbsp;</p>
 
    <a title='Create a new Activity Type' href='{% url create-type %}'>Create New Activity Type</a>

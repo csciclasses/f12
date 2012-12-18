@@ -11,11 +11,11 @@ def index(request):
     activity_type_list = ActivityType.get_user_activity_type_list(request.user['email'])
 
     if request.method == 'GET':
-        form = forms.ReportForm()
+        form = forms.ActivityListForm()
         form.prepare(activity_type_list)
         filters = {}
     else:
-        form = forms.ReportForm(request.POST)
+        form = forms.ActivityListForm(request.POST)
         form.prepare(activity_type_list)
         if form.is_valid():
             filters = form.cleaned_data
