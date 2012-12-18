@@ -42,3 +42,21 @@ class ActivityType(db.Model):
                     })
             return activity_list
         return None
+
+
+class Activity(db.Model):
+    user = db.ReferenceProperty(User)
+    activity_type = db.ReferenceProperty(ActivityType)
+    created_on = db.DateTimeProperty(auto_now_add=True)
+    active = db.BooleanProperty(default=True)
+    hours = db.IntegerProperty(default=0)
+    minutes = db.IntegerProperty(default=0)
+    seconds = db.IntegerProperty(default=0)
+
+    @staticmethod
+    def create_activity(email, data):
+        user = User._get_user_by_email(email)
+        activity_type = ActivityType.get_by_id(int(data['activity_type']))
+        Activity(user=user, activity_type=activity_type, hours=data.get('hours', 0),
+            minutes=data.get('minutes', 0), seconds=data.get('seconds', 0)).put()
+        return {'status': 'ActivitySaved'}

@@ -1,0 +1,64 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+    <style>
+        tr.small_input input
+        {
+            width: 3em;
+        }
+    </style>
+
+    {% if form.errors %}
+        <div style='border:1px solid #333; padding:10px; font-size:0.8em; background-color:#fdcec9;'>
+            Please correct the following errors:
+            <ul style='list-style-type: disc; padding: 10px 25px;'>
+            {% for k,v in form.errors.items %}
+                <li>{{ v|join:", " }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+        <p>&nbsp;</p>
+    {% else %}
+        {% if resp and resp.status == 'ActivitySaved' %}
+            <div style='border:1px solid #333; padding:10px; font-size:0.8em; background-color:#fdcec9;'>
+                Activity saved.
+            </div>
+            <p>&nbsp;</p>
+        {% endif %}
+    {% endif %}
+
+
+    <form action='{% url dashboard %}' method='POST'>
+        {% csrf_token %}
+
+        <table>
+            <tr>
+                <td>Activity Type:</td>
+                <td>&nbsp;{{ form.activity_type.as_widget }}</td>
+                <td>&nbsp;</td>
+            </tr>
+
+            <tr>
+                <td>{{ form.hours.label_tag }}</td>
+                <td>{{ form.minutes.label_tag }}</td>
+                <td>{{ form.seconds.label_tag }}</td>
+            </tr>
+            <tr class='small_input'>
+                <td>{{ form.hours.as_widget }}</td>
+                <td>{{ form.minutes.as_widget }}</td>
+                <td>{{ form.seconds.as_widget }}</td>
+            </tr>
+        </table>
+
+       <p>&nbsp;</p>
+        <input type='submit' value='Save' />
+
+    </form>
+
+   <p>&nbsp;</p>
+
+   <a title='Create a new Activity Type' href='{% url create-type %}'>Create New Activity Type</a>
+
+   <p>&nbsp;</p>
+{% endblock content %}

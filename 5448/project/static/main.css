@@ -123,7 +123,7 @@ h2
 
 label
 {
-    font-weight: bold;
+    /*font-weight: bold;*/
     display: block;
     padding-top:10px;
     color:#333;
